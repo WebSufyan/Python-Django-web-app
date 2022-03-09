@@ -1,0 +1,20 @@
+{% extends "booking/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">إضافة صور حلاقة لسيرتك الذاتية</legend>
+                {{ haircut_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">أضف</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

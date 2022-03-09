@@ -1,0 +1,56 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<br><br><br><br><h1></h1>
+<div id="cards_landscape_wrap-2">
+    <div class="container">
+        <div class="row row-cols-xs-12">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">رقم الانتظار</th>
+                        <th scope="col">الاسم</th>
+                        <th scope="col">رقم الهاتف</th>
+                        <th scope="col">قص الشعر المطلوب</th>
+                        <th scope="col">الحالة</th>
+                        {% if user.is_authenticated and request.user.id == current_user.id %}
+                            <th scope="col">تحديث الحالة ، حذف</th>
+                        {% endif %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment, appointment_number in appointments_and_numbers %}
+                            {% if appointment.appointment_statue == "انتهى" %}
+                                 <tr class="strikeout">
+                            {% else %}
+                                <tr>
+                            {% endif %}
+                                <th scope="row">{{appointment_number}}</th>
+                                <td>{{appointment.client_name}}</td>
+                                <td>{{appointment.client_phone_number}}</td>
+                                <td>{{appointment.client_desired_hair_cut}}</td>
+                                <td>{{appointment.appointment_statue}}</td>
+                                {% if user.is_authenticated and request.user.id == current_user.id %}
+                                    <td>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <a class="btn btn-success" href="{% url 'update_client' appointment.id %}">تحديث معلومات الزبون أو الحالة</a>
+                                    </form>
+                                    <form action="{% url 'delete_client' appointment.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger">إحدف</button>
+                                    </form>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+{% endblock content %}

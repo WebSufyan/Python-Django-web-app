@@ -1,0 +1,44 @@
+{% extends "booking/base.html" %}
+{% block content %}
+
+<div class="container gallery-container">
+    {% if user.is_authenticated %}
+        <h1>{{ user.first_name }}'s Gallery</h1>
+    {% else %}
+        <h1>{{ barbers_gallery.barber_name }}'s Gallery</h1>
+    {% endif %}
+    
+    {% if barbers_gallery %}
+        <div class="tz-gallery">
+            <div class="row">
+            {% for haircut in barbers_gallery %}
+                <div class="col-sm-12 col-md-4">
+                    <a class="lightbox" href="{{haircut.hairCuts.url}}">
+                        <img src="{{haircut.hairCuts.url}}" alt="">
+                    </a>
+                </div>
+                <form action="{% url 'delete_haircut_pic' haircut.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" >Delete</button>
+                </form>
+                    
+                  </div>
+            {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="card mb-3">
+                <div class="container">
+                    <h2>لم تقم بإضافة صور حلاقة بعد</h2>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-info list-group-item list-group-item-action" href="{% url 'add_haircut' %}" >أضف قصات الشعر</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+        
+</div>
+
+{% endblock %}

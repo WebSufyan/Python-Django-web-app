@@ -1,0 +1,36 @@
+{% extends "booking/base.html" %}
+{% block content %}
+
+<div class="container gallery-container">
+    {% if user.is_authenticated %}
+        <h1>{{ user.first_name }} صالة عرض</h1>
+    {% else %}
+        <h1>صالة عرض {{ barber_name }}</h1>
+    {% endif %}
+    
+    {% if barbers_gallery %}
+        <div class="tz-gallery">
+            <div class="row">
+            {% for haircut in barbers_gallery %}
+                <div class="col-sm-12 col-md-4">
+                    <a class="lightbox" href="{{haircut.hairCuts.url}}">
+                        <img src="{{haircut.hairCuts.url}}" alt="">
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    
+    {% else %}
+        <div class="container">
+            <div class="card mb-3">
+                <div class="container">
+                    <h2>هذا الحلاق لم يضيف قصات شعر إلى ألبومه بعد</h2>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+   
+</div>
+
+{% endblock %}

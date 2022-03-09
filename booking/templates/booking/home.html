@@ -1,0 +1,16 @@
+{% extends "booking/base.html" %}
+{% block content %}
+
+<div style="background-image:url('{{website_details.website_home_picture.url}}');background-size: cover;">
+    <br><br><br><br><br><br><br>
+    <div class="intro" style="color:white;" >
+        <h2><strong>مرحبا بكم في صالون الحلاقة</strong></h2>
+        <br>
+        <font size="+2"><h1>أفضل حلاق في بلدتك</h1></font>
+        <h1>رعاية مهنية</h1>
+        <br>
+        <a class="btn btn-primary" href="{% url 'book' %}">احجز مكانك الان</a>
+        <a class="btn btn-primary" href="{% url 'barbers_booking_list' %}">من في قائمة الانتظار اليوم</a>
+    </div>
+</div>  
+{% endblock content %}

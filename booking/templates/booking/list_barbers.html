@@ -1,0 +1,30 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<div id="cards_landscape_wrap-2">
+    <div class="container">
+        <div class="row row-cols-xs-12">
+            {% for object in object_list %}
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                    <a href="{% url 'barber_gallery' object.id %}">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                {% if object.barber_pic %}
+                                    <div class="image-box">
+                                        <img src="{{object.barber_pic.url}}" alt="" style="object-fit: cover; image-orientation: from-image;"/>
+                                    </div>
+                                {% endif %}
+                                <div class="text-container">
+                                    <h6>{{object.barber_name.get_full_name}}</h6>
+                                    <h5><strong>اضغط لرؤية ألبوم قصات الشعر لهذا الحلاق</h5></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                 </div>
+            {% empty %}
+                <h5> لا يوجد حلاقون مضافون حتى الان</h5>
+            {% endfor %}
+        </div>
+    </div>
+</div>   
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "booking/base.html" %}
+{% block content %}
+
+<div class="container">
+        <h2 class="Center">اضغط على الحلاق الذي تريد عرض الأشخاص الموجودين في قائمة انتظاره</h2>
+        {% for barber in object_list %}
+        <a href="{% url 'appointments_list' barber.id %}">
+        <div class="card">
+            <div class="row text-center">
+                <div class="col-sm-12 container">
+                  {{ barber.get_full_name }}
+                </div>
+            </div>
+        </div>
+        </a>
+        {% empty %}
+            <h5> لا يوجد حلاقون مضافون حتى الان</h5>
+        {% endfor %}
+    </div>
+</div> 
+{% endblock content %}
